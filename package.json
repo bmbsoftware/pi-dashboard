@@ -1,0 +1,70 @@
+{
+  "name": "pi-dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc mocha --compilers js:babel-core/register --require ./test/setup.js 'test/**/*.@(js|jsx)'",
+    "test:watch": "npm run test -- --watch",
+    "start": "webpack-dev-server --progress --colors",
+    "build": "webpack --progress --colors"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmbsoftware/pi-dashboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bmbsoftware/pi-dashboard/issues"
+  },
+  "homepage": "https://github.com/bmbsoftware/pi-dashboard#readme",
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-core": "^6.22.1",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "babel-register": "^6.22.0",
+    "chai": "^3.5.0",
+    "css-loader": "^0.26.1",
+    "eslint": "^3.14.1",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-react": "^6.9.0",
+    "file-loader": "^0.10.0",
+    "istanbul": "^0.4.5",
+    "jquery": "^3.1.1",
+    "jquery.ajax-cross-origin": "^1.1.0",
+    "jsdom": "^9.9.1",
+    "mocha": "^3.2.0",
+    "moment": "^2.17.1",
+    "node-sass": "^4.4.0",
+    "nyc": "^10.1.2",
+    "react": "^15.4.2",
+    "react-addons-pure-render-mixin": "^15.4.2",
+    "react-addons-test-utils": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-hot-loader": "^1.3.1",
+    "request": "^2.79.0",
+    "sass-loader": "^4.1.1",
+    "style-loader": "^0.13.1",
+    "superagent-cors-proxy": "0.0.1",
+    "superagent-xml2jsparser": "^0.1.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2",
+    "xml-js": "^1.0.2",
+    "xml-parser": "^1.2.1"
+  },
+  "dependencies": {
+    "superagent": "^3.4.0"
+  }
+}
