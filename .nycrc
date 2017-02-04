@@ -3,7 +3,9 @@
     "lcov",
     "text-summary"
   ],
-  "sourceMap": true,
-  "instrument": true,
-  "produce-source-map": true
+  "require": [
+    "babel-core/register"
+  ],
+  "sourceMap": false,
+  "instrument": false
 }

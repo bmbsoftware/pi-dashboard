@@ -56,6 +56,10 @@ div.feedwidget {
     a {
       text-decoration: none;
       color: $feedTxt;
+
+      &:visited {
+        color: $feedTxtVisited;
+      }
     }
 
     small {
@@ -65,16 +69,40 @@ div.feedwidget {
 
   ul {
     margin-left: 0;
-    padding-left: 20px;
+    padding: 0 20px;
 
     a {
       text-decoration: none;
       padding: 5px;
+      color: $feedTxt;
+
+      &:visited {
+        color: $feedTxtVisited;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
 
       li {
         list-style-type: none;
+        word-wrap: break-word;
         font-weight: bold;
-        color: $feedTxt;
+        clear: both;
+        margin-bottom: 10px;
+
+        div.link {
+          width: 70%;
+          float: left;
+        }
+
+        div.image {
+          width: 25%;
+          float: right;
+          min-height: 80px;
+          background-repeat: no-repeat;
+          background-size: contain;
+        }
       }
     }
   }

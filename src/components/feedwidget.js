@@ -6,7 +6,10 @@ import { xml2js } from 'xml-js';
 function FeedItem (props) {
   return (
     <a href={props.link} target="_blank">
-      <li className="feeditem">{props.title}</li>
+      <li className="feeditem">
+        <div className="link">{props.title}</div>
+        <div className="image" style={{ backgroundImage: `url(${props.thumbnail})` }} />
+      </li>
     </a>
   );
 }
@@ -58,18 +61,41 @@ export default class FeedWidget extends React.Component {
             error: err.message,
             lastFetch: new Date()
           });
+          return;
         }
 
         const xml = xml2js(res.text, { compact: true });
-        console.log(xml);
+        // console.log(xml);
         const feedItems = [];
         const feedTitle = xml.rss.channel.title._text || xml.rss.channel.title._cdata;
         const items = xml.rss.channel.item;
         if (items) {
           items.map(item => {
+            let thumbnail = '';
+            if (item.enclosure) {
+              thumbnail = item.enclosure._attributes.url;
+            } else if (item['media:thumbnail']) {
+              let media = item['media:thumbnail'];
+              if (media.constructor === Array){
+                media = media[0];
+              }
+              // console.log(media);
+              if (media._attributes) {
+                thumbnail = media._attributes.url;
+              }
+            } else if (item['content:encoded']) {
+              let media = item['content:encoded'];
+              thumbnail = media[1]._cdata;
+            } else if (item['media:content']) {
+              let media = item['media:content'];
+              thumbnail = media._attributes.url;
+            } else {
+              console.log(item);
+            }
             feedItems.push({
               title: item.title._text || item.title._cdata,
-              link: item.link._text || item.link._cdata
+              link: item.link._text || item.link._cdata,
+              thumbnail: thumbnail
             });
           });
         }
@@ -81,10 +107,12 @@ export default class FeedWidget extends React.Component {
       });
   }
 
+  feedRef = (c) => (this.feed = c);
+
   render() {
     const { feed, title, nextUpdate, error } = this.state;
     const feedItems = feed.map((item, index) => (
-      <FeedItem title={item.title} link={item.link} key={index} />
+      <FeedItem {...item} key={index} />
     ));
 
     let nextUpdateIn = '';
@@ -96,7 +124,7 @@ export default class FeedWidget extends React.Component {
     return (
       <div className="feedwidget widget">
         <div className="widget-content">
-          <h2 ref="feed">
+          <h2 ref={this.feedRef}>
             <a href={this.props.feed} target="_blank">{title}</a><br />
             <small>Next Update: {nextUpdateIn}</small>
           </h2>

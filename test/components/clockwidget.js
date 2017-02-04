@@ -21,7 +21,7 @@ describe('Clock Widget', () => {
   });
 
   it('renders the clock widget', () => {
-    const time = findDOMNode(component.refs.time);
+    const time = findDOMNode(component.time);
     expect(time).to.be.ok;
     expect(time.textContent).to.contain('Sunday');
   });

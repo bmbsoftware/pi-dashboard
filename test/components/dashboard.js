@@ -18,7 +18,7 @@ describe('Dashboard', () => {
     // component.componentWilUnmount();
   });
   it('renders the Dashboard', () => {
-    const title = findDOMNode(component.refs.title);
+    const title = findDOMNode(component.title);
     expect(title).to.be.ok;
     expect(title.textContent).to.contain('My Dashboard');
   });

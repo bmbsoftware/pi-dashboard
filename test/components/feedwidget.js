@@ -22,7 +22,7 @@ describe('Feed Widget', () => {
   });
 
   it('renders the Feed Widget', () => {
-    const feed = findDOMNode(component.refs.feed);
+    const feed = findDOMNode(component.feed);
     expect(feed).to.be.ok;
 
     const feedLink = feed.querySelectorAll('a');

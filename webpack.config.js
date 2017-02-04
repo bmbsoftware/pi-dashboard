@@ -1,17 +1,16 @@
 var webpack = require('webpack');
+var proxySettings = require('./proxySettings');
+
 module.exports = {
   entry: [
-    'webpack-dev-server/client?http://0.0.0.0:8080',
+    'webpack-dev-server/client?http://0.0.0.0:3000',
     'webpack/hot/only-dev-server',
     './src/app.js'
   ],
   debug: true,
   devtool: 'source-map',
   devServer: {
-    headers: [
-      { 'Access-Control-Allow-Origin': '*' },
-      { 'Access-Control-Allow-Credentials': 'true' }
-    ]
+    proxy: proxySettings
   },
   output: {
     path: __dirname + '/static',

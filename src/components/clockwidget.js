@@ -24,12 +24,14 @@ export default class ClockWidget extends React.Component {
     });
   }
 
+  timeRef = (c) => (this.time = c);
+
   render() {
     const time = moment(this.state.time).format('dddd, Do MMMM YYYY, h:mm:ss a');
     return (
       <div className="clockwidget widget">
         <div className="widget-content">
-          <h2 ref="time">{time}</h2>
+          <h2 ref={this.timeRef}>{time}</h2>
         </div>
       </div>
     );
