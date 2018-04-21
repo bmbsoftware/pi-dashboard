@@ -4,11 +4,12 @@ import moment from 'moment';
 import { xml2js } from 'xml-js';
 
 function FeedItem (props) {
+  const style = props.thumbnail ? { backgroundImage: `url(${props.thumbnail})` } : {};
   return (
     <a href={props.link} target="_blank">
       <li className="feeditem">
         <div className="link">{props.title}</div>
-        <div className="image" style={{ backgroundImage: `url(${props.thumbnail})` }} />
+        <div className="image" style={style} />
       </li>
     </a>
   );
@@ -51,7 +52,8 @@ export default class FeedWidget extends React.Component {
   getFeed() {
     const { size, feed } = this.props;
     request
-      .get(feed)
+      .post('http://localhost:3001/xml')
+      .send({ 'url': feed })
       .accept('xml')
       .end((err, res) => {
         if (err) {
@@ -63,9 +65,7 @@ export default class FeedWidget extends React.Component {
           });
           return;
         }
-
         const xml = xml2js(res.text, { compact: true });
-        // console.log(xml);
         const feedItems = [];
         const feedTitle = xml.rss.channel.title._text || xml.rss.channel.title._cdata;
         const items = xml.rss.channel.item;
@@ -88,9 +88,9 @@ export default class FeedWidget extends React.Component {
               thumbnail = media[1]._cdata;
             } else if (item['media:content']) {
               let media = item['media:content'];
-              thumbnail = media._attributes.url;
+              thumbnail = media._attributes && media._attributes.url;
             } else {
-              console.log(item);
+              // console.log(item);
             }
             feedItems.push({
               title: item.title._text || item.title._cdata,

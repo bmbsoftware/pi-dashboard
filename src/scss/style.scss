@@ -46,6 +46,17 @@ div.clockwidget {
   color: $clockTxt;
 }
 
+div.webwidget {
+  background-color: $webBg;
+  color: $feedTxt;
+
+  div.content {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #fff;
+  }
+}
+
 div.feedwidget {
   background-color: $feedBg;
   color: $feedTxt;
